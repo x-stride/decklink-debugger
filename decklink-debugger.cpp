@@ -12,7 +12,6 @@
 #include "tostring.h"
 #include "DeckLinkAPI.h"
 #include "DeviceProber.h"
-#include "HttpServer.h"
 #include "TablePrinter.h"
 
 #include "RefReleaser.hpp"
@@ -46,13 +45,6 @@ void _main() {
 			"Check `BlackmagicFirmwareUpdater status`, `dmesg` and `lspci`." << std::endl << std::endl;
 		throw "No DeckLink devices found";
 	}
-
-	LOG(DEBUG) << "creating HttpServer";
-	HttpServer* httpServer = new HttpServer(deviceProbers);
-	auto httpServerGuard = sg::make_scope_guard([httpServer]{
-		LOG(DEBUG) << "freeing HttpServer";
-		assert(httpServer->Release() == 0);
-	});
 
 	LOG(DEBUG2) << "registering Signal-Handler";
 	signal(SIGINT, sigfunc);
