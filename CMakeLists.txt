@@ -72,7 +72,6 @@ add_executable(decklink-debugger
     CaptureDelegate.cpp
     DeviceProber.cpp
     MutableVideoFrame.cpp
-    ImageEncoder.cpp
     TablePrinter.cpp
     DeckLinkAPIDispatch.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/rc.cpp
@@ -82,8 +81,7 @@ add_dependencies(decklink-debugger resources)
 
 # Search for and link to dependencies
 find_package(Threads REQUIRED)
-find_package(PNG REQUIRED)
-target_link_libraries(decklink-debugger dl ${CMAKE_THREAD_LIBS_INIT} ${PNG_LIBRARY})
+target_link_libraries(decklink-debugger dl ${CMAKE_THREAD_LIBS_INIT})
 target_include_directories(decklink-debugger PRIVATE ${PNG_INCLUDE_DIR})
 
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/decklink-debugger" DESTINATION bin)
