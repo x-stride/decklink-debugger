@@ -71,7 +71,6 @@ add_executable(decklink-debugger
     SubDeviceUtil.cpp
     CaptureDelegate.cpp
     DeviceProber.cpp
-    HttpServer.cpp
     MutableVideoFrame.cpp
     ImageEncoder.cpp
     TablePrinter.cpp
@@ -84,8 +83,7 @@ add_dependencies(decklink-debugger resources)
 # Search for and link to dependencies
 find_package(Threads REQUIRED)
 find_package(PNG REQUIRED)
-find_library(MICROHTTPD microhttpd)
-target_link_libraries(decklink-debugger dl ${CMAKE_THREAD_LIBS_INIT} ${MICROHTTPD} ${PNG_LIBRARY})
+target_link_libraries(decklink-debugger dl ${CMAKE_THREAD_LIBS_INIT} ${PNG_LIBRARY})
 target_include_directories(decklink-debugger PRIVATE ${PNG_INCLUDE_DIR})
 
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/decklink-debugger" DESTINATION bin)
